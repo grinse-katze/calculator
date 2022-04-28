@@ -1,43 +1,55 @@
-let a = parseInt(prompt("Input a number:"));
+/*let a = parseInt(prompt("Input a number:"));
 let b = parseInt(prompt("Input a number:"));
 let operator = prompt("Please input an operator: +, -, *, /")
+*/
+const operatorBtn = document.querySelectorAll(".operator");
+const numbers = document.querySelectorAll(".numbers");
+const enterBtn = document.querySelector(".enter");
+const display = document.querySelector(".display");
+const numberContainer = [];
+let operator = '';
 
-function add(a, b){
-    console.log(a + b);
+
+function readValue(){
+    numbers.forEach(btn => {
+        btn.addEventListener("click", () => {
+            display.textContent = btn.innerText;
+            numberContainer.push(btn.innerText);
+            console.log(numberContainer);
+        })
+    })
 }
 
-function substract(a, b){
-    console.log(a - b);
+function readOperator(){
+    operatorBtn.forEach(btn => {
+        btn.addEventListener("click", () =>{
+            display.textContent = btn.innerText;
+            operator = btn.innerText;
+            //console.log(operator);
+        })
+    })
 }
 
-function multiply(a, b){
-    console.log(a * b);
-}
+readValue();
+readOperator();
 
-function divide(a, b){
-    //console.log((a/b).toFixed(10));
-    if (a == 0 || b == 0){
-        console.log("Don't crash me!");
-        return;
-    }
-    console.log((a/b));
-}
+enterBtn.addEventListener("click", () => operate(operator, numberContainer[0], numberContainer[1]));
 
 function operate(operator, a, b){
+    a = parseInt(a);
+    b = parseInt(b);
     switch(operator){
         case '+':
-            add(a, b);
+            display.textContent = a + b;
             break;
         case '-':
-            substract(a, b);
+            display.textContent = a - b;
             break;
         case '*':
-            multiply(a, b);
+            display.textContent = a * b;
             break;
         case '/':
-            divide(a, b);
+            display.textContent = a / b;
             break;
     }
 }
-
-operate(operator, a, b);

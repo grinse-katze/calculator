@@ -6,34 +6,34 @@ const operatorBtn = document.querySelectorAll(".operator");
 const numbers = document.querySelectorAll(".numbers");
 const enterBtn = document.querySelector(".enter");
 const display = document.querySelector(".display");
-const numberContainer = [];
+
+let numberContainer = [];
+let inputNumber = '';
 let operator = '';
 
 
-function readValue(){
-    numbers.forEach(btn => {
-        btn.addEventListener("click", () => {
-            display.textContent = btn.innerText;
-            numberContainer.push(btn.innerText);
-            console.log(numberContainer);
-        })
-    })
+function readValue(e){
+    display.textContent = e.innerText;
+    inputNumber += e.innerText;
+    console.log(inputNumber);
 }
 
-function readOperator(){
-    operatorBtn.forEach(btn => {
-        btn.addEventListener("click", () =>{
-            display.textContent = btn.innerText;
-            operator = btn.innerText;
-            //console.log(operator);
-        })
-    })
+function readOperator(e){
+    display.textContent = e.innerText;
+    operator = e.innerText;
+    addNumberArray();
 }
 
-readValue();
-readOperator();
+function addNumberArray(){
+    numberContainer.push(inputNumber);
+    inputNumber = '';
+    console.log(numberContainer)
+}
 
-enterBtn.addEventListener("click", () => operate(operator, numberContainer[0], numberContainer[1]));
+enterBtn.addEventListener("click", () => {
+    addNumberArray();
+    operate(operator, numberContainer[0], numberContainer[1]);
+});
 
 function operate(operator, a, b){
     a = parseInt(a);
@@ -53,3 +53,15 @@ function operate(operator, a, b){
             break;
     }
 }
+
+operatorBtn.forEach(btn => {
+    btn.addEventListener("click", () =>{
+        readOperator(btn);
+    })
+})
+
+numbers.forEach(btn => {
+    btn.addEventListener("click", () => {
+        readValue(btn);
+    })
+})

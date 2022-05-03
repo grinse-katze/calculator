@@ -32,13 +32,16 @@ function fillNumberArray(){
     //if enter is clicked before numberContainer has a second input, display first input
         console.log(true);
         result.textContent = numberContainer[0];
+        //test
     }
     evaluate();
 }
 
 function evaluate(){
-    // might have to call fillNumberArray here, check for enter after operator
-    if (numberContainer.length >= 2) {
+    if (numberContainer[1] == 0 && operator == '/') {
+        result.textContent = 'ERROR';
+    }
+    else if (numberContainer.length >= 2) {
         operate(operator, numberContainer);
     }
 }

@@ -2,14 +2,13 @@ const operatorBtn = document.querySelectorAll(".operator");
 const numbers = document.querySelectorAll(".numbers");
 const enterBtn = document.querySelector(".enter");
 const input = document.querySelector(".input");
-const result = document.querySelector(".input");
+const result = document.querySelector(".result");
 const clearBtn = document.querySelector(".clear");
 
 let numberContainer = [];
 let inputNumber = '';
 let operator = '';
 let currentResult = 0;
-let enterPressed = false;
 
 
 function readValue(num){
@@ -20,7 +19,6 @@ function readValue(num){
 function readOperator(op){
     input.textContent += op;
     operator = op;
-    //console.log(operator);
 }
 
 function fillNumberArray(){
@@ -32,7 +30,6 @@ function fillNumberArray(){
     //if enter is clicked before numberContainer has a second input, display first input
         console.log(true);
         result.textContent = numberContainer[0];
-        //test
     }
     evaluate();
 }
@@ -98,8 +95,6 @@ operatorBtn.forEach(btn => {
 
 enterBtn.addEventListener("click", () => {
     fillNumberArray()
-    //evaluate();
-    //operate(operator, numberContainer);
 })
 
 clearBtn.addEventListener("click", () => clearDisplay())

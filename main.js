@@ -82,7 +82,7 @@ let currentResult = 0;
 function readValue(num){
     input.textContent += num;
     inputNumber += num;
-    fillNumberArray();
+    //fillNumberArray();
 }
 
 function readOperator(op){
@@ -97,6 +97,7 @@ function fillNumberArray(){
         inputNumber = '';
         console.log(numberContainer)
     }
+    evaluate();
 }
 
 function clearDisplay(){
@@ -122,7 +123,6 @@ function evaluate(){
     }
     
 }
-
 
 function operate(operator, numbers){
     switch(operator){
@@ -156,13 +156,15 @@ function operate(operator, numbers){
 numbers.forEach(btn => {
     btn.addEventListener("click", () => {
         readValue(btn.innerText)
-        evaluate();
+    //    evaluate();
     })
 })
 
 operatorBtn.forEach(btn => {
     btn.addEventListener("click", () => {
+        fillNumberArray();
         readOperator(btn.innerText)
+    //    evaluate();
     })
 })
 

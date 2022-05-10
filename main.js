@@ -3,17 +3,29 @@ const numbers = document.querySelectorAll(".numbers");
 const enterBtn = document.querySelector(".enter");
 const input = document.querySelector(".input");
 const result = document.querySelector(".result");
+const decimalBtn = document.querySelector(".decimal")
 const clearBtn = document.querySelector(".clear");
 
 let numberContainer = [];
 let inputNumber = '';
 let operator = '';
 let currentResult = 0;
+let decimal = false;
 
 
 function readValue(num){
+    if (decimal && inputNumber.includes('.') < 1) {
+        input.textContent += '.';
+        inputNumber += '.';
+        console.log(inputNumber);
+        decimal = false;
+        return;
+    } else if (decimal && inputNumber.includes('.') >= 1) {
+        decimal = false;
+        return;
+    }
     input.textContent += num;
-    inputNumber += num;
+    inputNumber += num;  
 }
 
 function readOperator(op){
@@ -23,7 +35,7 @@ function readOperator(op){
 
 function fillNumberArray(){
     if (numberContainer.length < 2 && inputNumber != '') {
-        numberContainer.push(parseInt(inputNumber));
+        numberContainer.push(Number(inputNumber));
         inputNumber = '';
         console.log('fill', numberContainer)
     } else {
@@ -93,8 +105,11 @@ operatorBtn.forEach(btn => {
     })
 })
 
-enterBtn.addEventListener("click", () => {
-    fillNumberArray()
+decimalBtn.addEventListener("click", () => {
+    decimal = true;
+    readValue()
 })
+
+enterBtn.addEventListener("click", () => fillNumberArray())
 
 clearBtn.addEventListener("click", () => clearDisplay())
